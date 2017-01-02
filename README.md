@@ -3,26 +3,18 @@ SublimeLinter-contrib-codeclimate
 
 [![Build Status](https://travis-ci.org/SublimeLinter/SublimeLinter-contrib-codeclimate.svg?branch=master)](https://travis-ci.org/SublimeLinter/SublimeLinter-contrib-codeclimate)
 
-This linter plugin for [SublimeLinter][docs] provides an interface to [codeclimate](__linter_homepage__). It will be used with files that have the “__syntax__” syntax.
+This linter plugin for [SublimeLinter][docs] provides an interface to [codeclimate](https://github.com/codeclimate/codeclimate). Code Climate supports a variety of languages through standardized Docker images known as static analysis engines.
 
 ## Installation
 SublimeLinter 3 must be installed in order to use this plugin. If SublimeLinter 3 is not installed, please follow the instructions [here][installation].
 
 ### Linter installation
-Before using this plugin, you must ensure that `codeclimate` is installed on your system. To install `codeclimate`, do the following:
-
-1. Install Other.
-
-1. Install `codeclimate` by typing the following in a terminal:
-   ```
-   <package manager> install codeclimate
-   ```
-
-
-**Note:** This plugin requires `codeclimate` __version__ or later.
+Before using this plugin, you must ensure that `codeclimate` is installed on your system. Please see the `codeclimate` documentation, specifically [Prerequisites](https://github.com/codeclimate/codeclimate#prerequisites) and [Installation](https://github.com/codeclimate/codeclimate#installation)
 
 ### Linter configuration
 In order for `codeclimate` to be executed by SublimeLinter, you must ensure that its path is available to SublimeLinter. Before going any further, please read and follow the steps in [“Finding a linter executable”](http://sublimelinter.readthedocs.org/en/latest/troubleshooting.html#finding-a-linter-executable) through “Validating your PATH” in the documentation.
+
+__This plugin requires usage within a Sublime project at this time.__
 
 Once you have installed and configured `codeclimate`, you can proceed to install the SublimeLinter-contrib-codeclimate plugin if it is not yet installed.
 
@@ -37,13 +29,6 @@ To install via Package Control, do the following:
 
 ## Settings
 For general information on how SublimeLinter works with settings, please see [Settings][settings]. For information on generic linter settings, please see [Linter Settings][linter-settings].
-
-In addition to the standard SublimeLinter settings, SublimeLinter-contrib-codeclimate provides its own settings. Those marked as “Inline Setting” or “Inline Override” may also be [used inline][inline-settings].
-
-|Setting|Description|Inline Setting|Inline Override|
-|:------|:----------|:------------:|:-------------:|
-|foo|Something.|&#10003;| |
-|bar|Something else.| |&#10003;|
 
 ## Contributing
 If you would like to contribute enhancements or fixes, please do the following:

@@ -7,4 +7,4 @@ This linter plugin for SublimeLinter provides an interface to codeclimate.
 Before this plugin will activate, you *must*
 follow the installation instructions here:
 
-https://github.com/Noah Davis/SublimeLinter-contrib-codeclimate
+https://github.com/codeclimate/SublimeLinter-contrib-codeclimate
