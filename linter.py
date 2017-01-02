@@ -12,6 +12,7 @@
 
 from SublimeLinter.lint import Linter, util, persist
 
+
 class Codeclimate(Linter):
     """Provides an interface to codeclimate."""
 
@@ -45,6 +46,7 @@ class Codeclimate(Linter):
     comment_re = None
 
     def cmd(self):
+        """Construct a cmd to provide a relative path to 'codeclimate analyze'."""
         result = [self.executable_path, 'analyze']
         relative_file_name = None
         for folder in self.view.window().folders():
