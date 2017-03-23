@@ -1,7 +1,7 @@
 SublimeLinter-contrib-codeclimate
 ================================
 
-[![Build Status](https://travis-ci.org/SublimeLinter/SublimeLinter-contrib-codeclimate.svg?branch=master)](https://travis-ci.org/SublimeLinter/SublimeLinter-contrib-codeclimate)
+[![Build Status](https://travis-ci.org/codeclimate/SublimeLinter-contrib-codeclimate.svg?branch=master)](https://travis-ci.org/codeclimate/SublimeLinter-contrib-codeclimate)
 
 This linter plugin for [SublimeLinter][docs] provides an interface to [codeclimate](https://github.com/codeclimate/codeclimate). Code Climate supports a variety of languages through standardized Docker images known as static analysis engines.
 
