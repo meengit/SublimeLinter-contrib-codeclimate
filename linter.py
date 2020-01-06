@@ -16,20 +16,21 @@ from SublimeLinter.lint import Linter, util, persist
 class Codeclimate(Linter):
     """Provides an interface to codeclimate."""
 
-    syntax = (
-        'ruby on rails',
-        'ruby',
-        'javascript',
-        'python',
-        'go',
-        'html',
-        'css',
-        'markdown',
-        'php',
-        'haskall',
-        'java',
-        'shellscript'
-    )
+    defaults = {
+        'selector': (
+            'source.css - '
+            'source.go - '
+            'source.haskall - '
+            'source.java - '
+            'source.javascript - '
+            'source.php - '
+            'source.python - '
+            'source.ruby - '
+            'source.scss - '
+            'source.shell - '
+            'text.html'
+        )
+    }
     executable = "codeclimate"
     regex = r'^(?P<line>\d+)(?:-\d+)?:\s(?P<message>.+)$'
     multiline = False
