@@ -42,7 +42,7 @@ class Codeclimate(Linter):
 
     def cmd(self):
         """Construct a cmd to provide a relative path to 'codeclimate analyze'."""
-        result = ['codeclimate', 'analyze', '-e structure', '-e duplication']
+        result = ['codeclimate', 'analyze', '-e', 'structure', '-e', 'duplication']
         relative_file_name = None
         for folder in self.view.window().folders():
             if self.filename.find(folder) == 0:
