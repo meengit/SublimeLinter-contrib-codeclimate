@@ -25,6 +25,7 @@ class Codeclimate(Linter):
             'source.haskall, '
             'source.java, '
             'source.javascript, '
+            'source.js, '
             'source.php, '
             'source.python, '
             'source.ruby, '
