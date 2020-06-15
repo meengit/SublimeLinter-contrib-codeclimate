@@ -1,16 +1,18 @@
 #
 # linter.py
-# Linter for SublimeLinter3, a code checking framework for Sublime Text 3
+# Linter for SublimeLinter4, a code checking framework for Sublime Text 3
 #
 # Written by Noah Davis
 # Copyright (c) 2016 Noah Davis
 #
+# Updated by Schuyler Jager & Andreas for SublimeLinter 4
+# Copyright (c) 2020 Schuyler Jager & Andreas
 # License: MIT
 #
 
 """This module exports the Codeclimate plugin class."""
 
-from SublimeLinter.lint import Linter, util, persist
+from SublimeLinter.lint import Linter, util
 
 
 class Codeclimate(Linter):
@@ -42,14 +44,7 @@ class Codeclimate(Linter):
     word_re = None
 
     def cmd(self):
-        """Construct a cmd to provide a relative path to 'codeclimate analyze'."""
-        result = ['codeclimate', 'analyze', '-e', 'structure', '-e', 'duplication']
-        relative_file_name = None
-        for folder in self.view.window().folders():
-            if self.filename.find(folder) == 0:
-                relative_file_name = self.filename.replace(folder + '/', '')
-        if relative_file_name == None:
-            return result
-        result.append(relative_file_name)
-        persist.debug(result)
-        return result
+        """Set working directory and run 'codeclimate analyze'."""
+        if self.context.get('project_root') is None:
+            self.defaults['chdir'] = '${folder}'
+        return ['codeclimate', 'analyze', '${file_on_disk}']
