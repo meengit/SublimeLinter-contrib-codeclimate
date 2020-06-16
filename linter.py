@@ -46,5 +46,7 @@ class Codeclimate(Linter):
     def cmd(self):
         """Set working directory and run 'codeclimate analyze'."""
         if self.context.get('project_root') is None:
-            self.defaults['chdir'] = '${folder}'
+            self.defaults['chdir'] = '${folder}' \
+                if self.context.get('folder') is not None \
+                else '${file_path}'
         return ['codeclimate', 'analyze', '${file_on_disk}']
