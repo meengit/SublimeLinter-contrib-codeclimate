@@ -57,6 +57,23 @@ If your `.codeclimate.yml` does not live in the project root folder, you can set
 }
 ```
 
+If you want to ignore the configuration in a `.codeclimate.yml`, for instance, to run a subset of codeclimate engines, you can configure this by setting the linter arguments either in the global SublimeLinter settings or in your project settings. In the global settings, this could look like this:
+
+```json
+{
+  "linters": {
+    "codeclimate": {
+      "args": [
+          "-e",
+          "structure",
+          "-e",
+          "duplication"
+        ]
+    }
+  }
+}
+```
+
 ## Contributing
 If you would like to contribute enhancements or fixes, please do the following:
 
