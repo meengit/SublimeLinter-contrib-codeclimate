@@ -1,8 +1,6 @@
 SublimeLinter-contrib-codeclimate
 =================================
 
-> Please note: This was originally a fork of [codeclimate/SublimeLinter-contrib-codeclimate][codeclimate-origin] to make it compatible for SublimeLinter 4.
-
 [![Build Status](https://travis-ci.org/codeclimate/SublimeLinter-contrib-codeclimate.svg?branch=master)](https://travis-ci.org/codeclimate/SublimeLinter-contrib-codeclimate)
 
 This linter plugin for [SublimeLinter][docs] provides an interface to [codeclimate](https://github.com/codeclimate/codeclimate). Code Climate supports a variety of languages through standardized Docker images known as static analysis engines.
@@ -27,37 +25,28 @@ Within Sublime Text, bring up the [Command Palette][cmd] and type `install`. Amo
 
 When the plugin list appears, type `codeclimate`. Among the entries you should see `SublimeLinter-contrib-codeclimate`. If that entry is not highlighted, use the keyboard or mouse to select it.
 
-## Settings
-For general information on how SublimeLinter works with settings, please see [Settings][settings]. For information on generic linter settings, please see [Linter Settings][linter-settings].
-
 ## How it works
-
-The linter is first looking for a SublimeText Project. If a `*.sublime-project` is given, it executes `codeclimate` in the project root directory. If no project is given, it tries to execute `codeclimate` in the first opened folder of the folder pane.
+The linter is first looking for a SublimeText Project. If a `*.sublime-project` is given, it executes `codeclimate` in the directory of the project root. If no project is given, it tries to execute `codeclimate` in the first opened folder of the folder pane. If just a file is open, it tries to execute `codeclimate` in the file directory.
 
 If the SublimeText project folder or the first opened folder in the folder pane contains a `.codeclimate.yml` configuration file, `codeclimate` will recognise its settings. If no configuration file can be evaluated, `codeclimate` will automatically run the defaults of `structure` and `duplication` at this time.
 
-## Linter Configuration
+## Settings
+For general information on how SublimeLinter works with settings, please see [Settings][settings]. For information on generic linter settings, please see [Linter Settings][linter-settings].
 
-To specify the path to executable, please use the SublimeLinter settings:
+### Examples
+You can set the path to the `codeclimate` executable in the global SublimeLinter settings or your project settings:
 
 ```json
 {
   "linters": {
-    "executable": "/usr/local/bin/codeclimate"
+    "codeclimate": {
+      "executable": "/usr/local/bin/codeclimate"
+    }
   }
 }
 ```
 
-
-If your `.codeclimate.yml` does not live in the project root folder, you can set also the `working_dir` of SublimeLinter:
-
-```json
-{
-  "working_dir": "${folder:$file_path}"
-}
-```
-
-If you want to ignore the configuration in a `.codeclimate.yml`, for instance, to run a subset of codeclimate engines, you can configure this by setting the linter arguments either in the global SublimeLinter settings or in your project settings. In the global settings, this could look like this:
+If you want to ignore the configuration of a `.codeclimate.yml`,  for instance, to run a subset of codeclimate engines, you can set linter arguments  in the global SublimeLinter settings or your project settings:
 
 ```json
 {
@@ -71,6 +60,14 @@ If you want to ignore the configuration in a `.codeclimate.yml`, for instance, t
         ]
     }
   }
+}
+```
+
+It is also possible to set a working directory for execution. But be careful with this! To make this work with the `codeclimate` CLI, the working directory ***must*** be in the path of the file you want to lint!
+
+```json
+{
+  "working_dir": "/path/to/working/dir"
 }
 ```
 
@@ -92,7 +89,6 @@ Please note that modifications should follow these coding guidelines:
 
 Thank you for helping out!
 
-[codeclimate-origin]: https://github.com/codeclimate/SublimeLinter-contrib-codeclimate
 [docs]: http://sublimelinter.readthedocs.org
 [installation]: http://sublimelinter.readthedocs.org/en/latest/installation.html
 [locating-executables]: http://sublimelinter.readthedocs.org/en/latest/usage.html#how-linter-executables-are-located
