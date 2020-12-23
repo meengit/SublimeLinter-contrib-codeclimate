@@ -26,9 +26,9 @@ Within Sublime Text, bring up the [Command Palette][cmd] and type `install`. Amo
 When the plugin list appears, type `codeclimate`. Among the entries you should see `SublimeLinter-contrib-codeclimate`. If that entry is not highlighted, use the keyboard or mouse to select it.
 
 ## How it works
-The linter is first looking for a SublimeText Project. If a `*.sublime-project` is given, it executes `codeclimate` in the directory of the project root. If no project is given, it tries to execute `codeclimate` in the first opened folder of the folder pane. If just a file is open, it tries to execute `codeclimate` in the file directory.
+If the first opened folder in SublimeText contains a `.codeclimate.yml` configuration file in its root, `codeclimate` will recognize this file's settings.
 
-If the SublimeText project folder or the first opened folder in the folder pane contains a `.codeclimate.yml` configuration file, `codeclimate` will recognise its settings. If no configuration file can be evaluated, `codeclimate` will automatically run the defaults of `structure` and `duplication` at this time.
+Suppose the `codeclimate` CLI finds no configuration file in the folder root: In that case, it will automatically run the default inspections of `structure` and `duplication`. If you have a `.codeclimate.yml` configuration file in a different folder, you can set SublimeLinter's `working_dir` setting (please see examples).
 
 ## Settings
 For general information on how SublimeLinter works with settings, please see [Settings][settings]. For information on generic linter settings, please see [Linter Settings][linter-settings].
@@ -46,7 +46,7 @@ You can set the path to the `codeclimate` executable in the global SublimeLinter
 }
 ```
 
-If you want to ignore the configuration of a `.codeclimate.yml`,  for instance, to run a subset of codeclimate engines, you can set linter arguments  in the global SublimeLinter settings or your project settings:
+If you want to ignore the configuration of a `.codeclimate.yml`,  for instance, to run a subset of codeclimate engines, you can set linter arguments in the global SublimeLinter settings or your project settings:
 
 ```json
 {
@@ -63,13 +63,21 @@ If you want to ignore the configuration of a `.codeclimate.yml`,  for instance, 
 }
 ```
 
-It is also possible to set a working directory for execution. But be careful with this! To make this work with the `codeclimate` CLI, the working directory ***must*** be in the path of the file you want to lint!
+Suppose you use a `.codeclimate.yml`-configuration file. In that case, the `codeclimate` CLI needs to be executed in your configuration file's directory. Otherwise, it can't detect your configuration and runs only the default analyzes.
+
+SublimeLinter takes the (first) open folder (or the folder of a single opened file) as the working directory for executing its linter commands. You can change this behavior by setting the working directory of execution:
 
 ```json
 {
-  "working_dir": "/path/to/working/dir"
+  "linters": {
+    "codeclimate": {
+      "working_dir": "/path/to/working/dir"
+    }
+  }
 }
 ```
+
+*Hint: Make sure the working directory is in the path of the file you want to lint!*
 
 ## Contributing
 If you would like to contribute enhancements or fixes, please do the following:
