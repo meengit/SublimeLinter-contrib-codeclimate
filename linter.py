@@ -44,9 +44,6 @@ class Codeclimate(Linter):
     error_stream = util.STREAM_BOTH
     word_re = None
 
-    root = None
-    path = None
-
     def cmd(self):
         """Set working directory and run 'codeclimate analyze'."""
         if self.context.get('project_root') is None:
