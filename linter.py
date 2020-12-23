@@ -25,7 +25,7 @@ class Codeclimate(Linter):
         'selector': (
             'source.css, '
             'source.go, '
-            'source.haskall, '
+            'source.haskell, '
             'source.java, '
             'source.javascript, '
             'source.js, '
