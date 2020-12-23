@@ -11,17 +11,12 @@
 #
 
 """This module exports the Codeclimate plugin class."""
-
-import re
 from SublimeLinter.lint import Linter, util
 
 
 class Codeclimate(Linter):
     """Provides an interface to codeclimate."""
-
     defaults = {
-        'chdir': "${project}",
-        'executable': 'codeclimate',
         'selector': (
             'source.css, '
             'source.go, '
@@ -45,12 +40,10 @@ class Codeclimate(Linter):
     word_re = None
 
     def cmd(self):
-        """Set working directory and run 'codeclimate analyze'."""
-        if self.context.get('project_root') is None:
-            self.defaults['chdir'] = '${folder}' \
-                if self.context.get('folder') is not None \
-                else '${file_path}'
+        """Set command and run 'codeclimate analyze'."""
+        if 'executable' in self.settings:
+            command = self.settings.get('executable')
+        else:
+            command = 'codeclimate'
 
-        root = re.search(r"\{(\w+)\}", self.defaults['chdir']).group(1)
-        path = self.filename.replace(self.context.get(root) + '/', '')
-        return ['codeclimate', 'analyze', path]
+        return [command, 'analyze', '${args}', '${file}']
