@@ -11,7 +11,12 @@
 #
 
 """This module exports the Codeclimate plugin class."""
+import logging
+import os
 from SublimeLinter.lint import Linter, util
+
+
+logger = logging.getLogger('SublimeLinter.plugin.eslint')
 
 
 class Codeclimate(Linter):
@@ -41,9 +46,31 @@ class Codeclimate(Linter):
 
     def cmd(self):
         """Set command and run 'codeclimate analyze'."""
-        if 'executable' in self.settings:
-            command = self.settings.get('executable')
-        else:
-            command = 'codeclimate'
+        abs_path = self.filename
+        working_dir = self.get_working_dir()
 
-        return [command, 'analyze', '${args}', '${file}']
+        msg = 'You try to lint the file %s from outside of SublimeText\'s ' \
+              'working directory (%s), which is not supported by this ' \
+              'SublimeLinter plugin at this time. You can do either:\n' \
+              '* You open the directory containing the current file in' \
+              'a new window. You may have to add a customized ' \
+              '`.codeclimate.yml` configuration to that directory ' \
+              'as well;\n' \
+              '* You change the working directory of the linter plugin in ' \
+              ' the global or the Project\'s settings;\n' \
+              '* You disable the linter plugin in the global or the ' \
+              'Project\'s settings.\n\n' \
+              'Please visit https://github.com/codeclimate/' \
+              'SublimeLinter-contrib-codeclimate for examples.' \
+              '\n' % (abs_path, working_dir)
+
+        command = ['codeclimate', 'analyze', '${args}']
+
+        if not (abs_path.startswith(os.path.abspath(working_dir) + os.sep)):
+            logger.info(msg)
+            return None
+
+        file = os.path.relpath(self.filename, self.get_working_dir())
+        command.append(file)
+        command.append('${xoo}')
+        return command
