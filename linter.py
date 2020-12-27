@@ -64,13 +64,9 @@ class Codeclimate(Linter):
               'SublimeLinter-contrib-codeclimate for examples.' \
               '\n' % (abs_path, working_dir)
 
-        command = ['codeclimate', 'analyze', '${args}']
-
         if not (abs_path.startswith(os.path.abspath(working_dir) + os.sep)):
             logger.info(msg)
             return None
 
-        file = os.path.relpath(self.filename, self.get_working_dir())
-        command.append(file)
-        command.append('${xoo}')
-        return command
+        file = os.path.relpath(abs_path, working_dir)
+        return ['codeclimate', 'analyze', '${args}', file, '${xoo}']
