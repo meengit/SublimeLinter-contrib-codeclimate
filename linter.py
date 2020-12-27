@@ -18,6 +18,7 @@ from SublimeLinter.lint import Linter, PermanentError, util
 class Codeclimate(Linter):
     """Provides an interface to codeclimate."""
     defaults = {
+        'excludes': ['!${folder::}*'],
         'selector': (
             'source.css, '
             'source.go, '
@@ -33,6 +34,7 @@ class Codeclimate(Linter):
             'text.html'
         )
     }
+
     regex = r'^== ((?P<filename>.*)(?= \(\d+ issue\) ==))( \(\d+ issue\) ==\n(?P<line>\d+))(?:-\d+)?:\s(?P<message>.+)$'
     multiline = True
     line_col_base = (1, 1)
