@@ -33,8 +33,8 @@ class Codeclimate(Linter):
             'text.html'
         )
     }
-    regex = r'^(?P<line>\d+)(?:-\d+)?:\s(?P<message>.+)$'
-    multiline = False
+    regex = r'^== ((?P<filename>.*)(?= \(\d+ issue\) ==))( \(\d+ issue\) ==\n(?P<line>\d+))(?:-\d+)?:\s(?P<message>.+)$'
+    multiline = True
     line_col_base = (1, 1)
     tempfile_suffix = '-'
     error_stream = util.STREAM_BOTH
