@@ -11,17 +11,14 @@
 #
 
 """This module exports the Codeclimate plugin class."""
-import logging
 import os
-from SublimeLinter.lint import Linter, util
-
-
-logger = logging.getLogger('SublimeLinter.plugin.eslint')
+from SublimeLinter.lint import Linter, PermanentError, util
 
 
 class Codeclimate(Linter):
     """Provides an interface to codeclimate."""
     defaults = {
+        'excludes': ['!${folder::}*'],
         'selector': (
             'source.css, '
             'source.go, '
@@ -37,8 +34,9 @@ class Codeclimate(Linter):
             'text.html'
         )
     }
-    regex = r'^(?P<line>\d+)(?:-\d+)?:\s(?P<message>.+)$'
-    multiline = False
+
+    regex = r'^== ((?P<filename>.*)(?= \(\d+ issue\) ==))( \(\d+ issue\) ==\n(?P<line>\d+))(?:-\d+)?:\s(?P<message>.+)$'
+    multiline = True
     line_col_base = (1, 1)
     tempfile_suffix = '-'
     error_stream = util.STREAM_BOTH
@@ -49,24 +47,13 @@ class Codeclimate(Linter):
         abs_path = self.filename
         working_dir = self.get_working_dir()
 
-        msg = 'You try to lint the file %s from outside of SublimeText\'s ' \
-              'working directory (%s), which is not supported by this ' \
-              'SublimeLinter plugin at this time. You can do either:\n' \
-              '* You open the directory containing the current file in' \
-              'a new window. You may have to add a customized ' \
-              '`.codeclimate.yml` configuration to that directory ' \
-              'as well;\n' \
-              '* You change the working directory of the linter plugin in ' \
-              ' the global or the Project\'s settings;\n' \
-              '* You disable the linter plugin in the global or the ' \
-              'Project\'s settings.\n\n' \
-              'Please visit https://github.com/codeclimate/' \
-              'SublimeLinter-contrib-codeclimate for examples.' \
-              '\n' % (abs_path, working_dir)
+        msg = 'The file \'%s\' is not part of the working dir (%s). ' \
+              'Please see the Linter\'s README.md to get further ' \
+              'instructions.' % (abs_path, working_dir)
 
         if not (abs_path.startswith(os.path.abspath(working_dir) + os.sep)):
-            logger.info(msg)
-            return None
+            self.notify_unassign()
+            raise PermanentError(msg)
 
         file = os.path.relpath(abs_path, working_dir)
         return ['codeclimate', 'analyze', '${args}', file, '${xoo}']
