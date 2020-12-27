@@ -26,7 +26,7 @@ Within Sublime Text, bring up the [Command Palette][cmd] and type `install`. Amo
 When the plugin list appears, type `codeclimate`. Among the entries you should see `SublimeLinter-contrib-codeclimate`. If that entry is not highlighted, use the keyboard or mouse to select it.
 
 ## How it works
-If the first opened folder in SublimeText contains a `.codeclimate.yml` configuration file in its root, `codeclimate` will recognize this file's settings.
+If the opened folder in SublimeText contains a `.codeclimate.yml` configuration file in its root, `codeclimate` will recognize this file's settings.
 
 Suppose the `codeclimate` CLI finds no configuration file in the folder root: In that case, it will automatically run the default inspections of `structure` and `duplication`. If you have a `.codeclimate.yml` configuration file in a different folder, you can set SublimeLinter's `working_dir` setting (please see examples).
 
@@ -65,7 +65,7 @@ If you want to ignore the configuration of a `.codeclimate.yml`,  for instance, 
 
 Suppose you use a `.codeclimate.yml`-configuration file. In that case, the `codeclimate` CLI needs to be executed in your configuration file's directory. Otherwise, it can't detect your configuration and runs only the default analyzes.
 
-SublimeLinter takes the (first) open folder (or the folder of a single opened file) as the working directory for executing its linter commands. You can change this behavior by setting the working directory of execution:
+SublimeLinter takes the current file's root folder in SublimeText's sidebar as the working directory for executing its linter commands. You can change this behavior by setting the working directory of execution:
 
 ```json
 {
