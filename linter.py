@@ -18,7 +18,6 @@ from SublimeLinter.lint import Linter, PermanentError, util
 class Codeclimate(Linter):
     """Provides an interface to codeclimate."""
     defaults = {
-        'excludes': ['!${folder::}*'],
         'selector': (
             'source.css, '
             'source.go, '
