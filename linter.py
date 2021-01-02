@@ -21,21 +21,9 @@ logger = logging.getLogger('SublimeLinter.plugin.codeclimate')
 
 class Codeclimate(Linter):
     """Provides an interface to codeclimate."""
+
     defaults = {
-        'selector': (
-            'source.css, '
-            'source.go, '
-            'source.haskell, '
-            'source.java, '
-            'source.javascript, '
-            'source.js, '
-            'source.php, '
-            'source.python, '
-            'source.ruby, '
-            'source.scss, '
-            'source.shell, '
-            'text.html'
-        )
+        'selector': ()
     }
 
     regex = r'^(?P<line>\d+)(?:-\d+)?:\s(?P<message>.+)$'
