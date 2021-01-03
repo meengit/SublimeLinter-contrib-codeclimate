@@ -6,7 +6,11 @@ This SublimeLinter plugin provides an interface to the codeclimate CLI.
 IMPORTANT!
 ----------
 
->>> By default, this linter plugin is not associated with any file type! <<<
+>>> This plugin may cause performance problems if many projects 
+    and documents are open in SublimeText. <<<
+
+I recommend deactivating the plugin globally by default and then activating 
+it depending on your opened folders or as part of a SublimeText Project. 
 
 To make this plugin work, please read the project's README.md carefully:
 

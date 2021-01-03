@@ -20,20 +20,20 @@ Please use [Package Control][pc] to install the linter plugin. This will ensure 
 
 Within Sublime Text, bring up the [Command Palette][cmd] and type *install*. Select `Package Control: Install Package` and wait a few seconds while Package Control fetches the list of the available plugins.
 
-When the plugin list appears, type *codeclimate* and select `SublimeLinter-contrib-codeclimate`. 
+When the plugin list appears, type *codeclimate* and select `SublimeLinter-contrib-codeclimate`.
 
 ## How it works
 
-### File types
-
-**By default, this linter plugin is not associated with any file type!** In some cases, the codeclimate CLI uses a significant amount of resources on your system to run its inspections. I assume you won't run the codeclimate CLI on any open file in SublimeText.
-
-You can configure the associated file types in the global SublimeLinter settings or your project settings (*[see Settings](#settings)*).
-
-### For associated file types
-
 * If the opened folder in SublimeText contains a `.codeclimate.yml` configuration file in its root, `codeclimate` will recognize this file's settings. Otherwise, it will automatically run the default inspections of `structure` and `duplication`.
 * If you have a `.codeclimate.yml` configuration file in a different folder, you can set SublimeLinter's `working_dir` setting (*[see Settings](#settings)*).
+
+There are some use cases SublimeLinter can't run `codeclimate`. For instance: if you open a single file beside already opened folders in the same view. In that case, the linter will fail and print a warning because the single file has no working directory (which is required by `codeclimate`).
+
+## Limitations
+
+***This plugin may cause performance problems if many projects and documents are open in SublimeText.***
+
+I recommend deactivating the plugin globally by default and then activating it depending on your opened folders or as part of a SublimeText Project. 
 
 ## Settings
 
@@ -43,22 +43,19 @@ To see how SublimeLinter's settings works, please see [settings][sublimelinter-s
 
 Here I try to give you some examples of everyday use cases.
 
-#### Set associated file types
-
-You can set the associated file types in the global SublimeLinter settings or your project settings:
+### Disable/enable this plugin
 
 ```json
 {
   "linters": {
     "codeclimate": {
-      "selector": "source.php, source.python"
+      "disable": true
     }
   }
 }
 ```
 
-> *To find out what selector to use for given file type, use the "Tools > Developer > Show Scope Name" menu entry. ([SublimeLinter documenation][sublimelinter-selector])*
-
+For SublimeLinter's global settings, go to *Preferences > Package Settings > SublimeLinter > Settings*.
 
 #### Set executable
 
@@ -110,6 +107,22 @@ SublimeLinter takes the current file's root folder in SublimeText's sidebar as t
 ```
 
 *Hint: Make sure the working directory is in the path of the file you want to lint!*
+
+#### Set associated file types
+
+You can set the associated file types in the global SublimeLinter settings or your project settings:
+
+```json
+{
+  "linters": {
+    "codeclimate": {
+      "selector": "source.php, source.python"
+    }
+  }
+}
+```
+
+> *To find out what selector to use for given file type, use the "Tools > Developer > Show Scope Name" menu entry. ([SublimeLinter documenation][sublimelinter-selector])*
 
 ## Contributing
 
