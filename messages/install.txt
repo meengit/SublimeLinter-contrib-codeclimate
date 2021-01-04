@@ -1,10 +1,42 @@
 SublimeLinter-contrib-codeclimate
--------------------------------
-This linter plugin for SublimeLinter provides an interface to codeclimate.
+=================================
 
-** IMPORTANT! **
+This SublimeLinter plugin provides an interface to the codeclimate CLI.
 
-Before this plugin will activate, you *must*
-follow the installation instructions here:
+IMPORTANT!
+----------
 
-https://github.com/codeclimate/SublimeLinter-contrib-codeclimate
+>>> This plugin may cause performance problems if many projects 
+    and documents are open in SublimeText. <<<
+
+I recommend deactivating the plugin globally by default and then activating 
+it depending on your opened folders or as part of a SublimeText Project. 
+
+To make this plugin work, please read the project's README.md carefully:
+
+https://github.com/meengit/SublimeLinter-contrib-codeclimate
+
+CHANGELOG
+---------
+
+2.1.0
+
+Improvements
+
+* Simplified documentation
+* Development: New Travis-CI with Python 3.8
+
+Changes
+
+* New package maintainer
+* Development: Replaced `.sublimelinterrc` with `.flake8` configuration
+
+2.0.0
+
+Improvements
+
+* Upgraded Linter Plugin to work with SublimeLinter 4
+* Added Examples to README.md
+
+
+

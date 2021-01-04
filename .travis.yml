@@ -1,6 +1,6 @@
 language: python
-python:
-  - "3.3"
+python: ["3.8"]
+
 # command to install dependencies
 install:
   - pip install flake8
@@ -9,3 +9,8 @@ install:
 script:
   - flake8 . --max-line-length=120
   - pydocstyle . --add-ignore=D202
+branches:
+  only:
+    - develop
+    - main
+    - master

@@ -21,6 +21,7 @@ logger = logging.getLogger('SublimeLinter.plugin.codeclimate')
 
 class Codeclimate(Linter):
     """Provides an interface to codeclimate."""
+
     defaults = {
         'selector': (
             'source.css, '
