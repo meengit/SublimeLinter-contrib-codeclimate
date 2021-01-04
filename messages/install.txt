@@ -24,11 +24,10 @@ CHANGELOG
 Improvements
 
 * Simplified documentation
+* Development: New Travis-CI with Python 3.8
 
 Changes
 
-* By default, this linter plugin is not associated with any file type
-  to save system resources
 * New package maintainer
 * Development: Replaced `.sublimelinterrc` with `.flake8` configuration
 
